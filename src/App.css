@@ -16,8 +16,16 @@
 
 
 
-/* login page styling */
+/* shop page styling */
 
 
+.shop{
+  display: block;
+  width: auto;
+  height: 75vh;
+  background-color: aqua;
+
+
+}
 
 
