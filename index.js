@@ -9,10 +9,11 @@ app.use(cors());
 
 const contactRouter = require('./routes/contactRoute');
 const userRouter = require('./routes/userRoute');
+const authRouter = require('./routes/authProductsRoute');
 
-
-app.use('/contact',contactRouter);
-app.use('/user',userRouter);
+app.use('/contact', contactRouter);
+app.use('/user', userRouter);
+app.use('/products', authRouter);
 
 
 app.listen(port, () => console.log(`Server Running on ${port}`));
