@@ -8,7 +8,7 @@ function Protected(props) {
 
     useEffect(() => {
         const user = localStorage.getItem("UserName");
-        const token = localStorage.getItem("UserToken");
+        const token = localStorage.getItem("token");
 
         if (!user && token) {
             navigate('/Login');
