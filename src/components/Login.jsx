@@ -21,7 +21,7 @@ function Login() {
             if (response.status === 200 || response.status === 201) {
                 const { token, UserName } = response.data;
 
-                localStorage.setItem('token', token);
+                localStorage.setItem('Usertoken', token);
                 localStorage.setItem('UserName', UserName);
 
                 toast.success("Login Successfully");

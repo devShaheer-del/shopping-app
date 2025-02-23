@@ -7,7 +7,7 @@ function Products() {
   const fetchProducts = async () => {
     try {
       const url = "http://localhost:8080/products/getProducts";
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('Usertoken');
 
       if (!token) {
         console.error('User token is missing');
