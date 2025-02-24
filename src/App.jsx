@@ -18,7 +18,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/About' element={<Protected Component={About} />} />
+            <Route path='/About' element={<About />} />
             <Route path='/Service' element={<Service />} />
             <Route path='/Contact' element={<Contact />} />
             <Route path='/Login' element={<LoginPage />} />
