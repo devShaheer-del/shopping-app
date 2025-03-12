@@ -18,10 +18,14 @@ const contactRouter = require('./routes/contactRoute');
 const userRouter = require('./routes/userRoute');
 const authRouter = require('./routes/authProductsRoute');
 const productRouter = require('./routes/AddProducts');
+const AdminRouter = require('./routes/AdminRoute');
+const CategoryRouter = require('./routes/categoryRouter');
 app.use('/contact', contactRouter);
 app.use('/user', userRouter);
 app.use('/products', authRouter);
 app.use('/createProduct', productRouter);
+app.use('/admin', AdminRouter);
+app.use('/category',CategoryRouter);
 
 
 app.listen(port, () => console.log(`Server Running on ${port}`));

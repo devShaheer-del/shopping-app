@@ -82,3 +82,24 @@ exports.LoginUser = async (req, res) => {
         });
     }
 };
+
+
+
+exports.getUser = async (req, res) => {
+    try {
+
+        const users = await db.find({});
+
+        res.status(200).json({
+            message: "User Get Successfully",
+            success: true,
+            users: users
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Something went wrong",
+            error: error.message, // Send only the error message to the client
+        });
+    }
+}

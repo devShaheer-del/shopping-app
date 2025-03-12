@@ -16,3 +16,22 @@ exports.createContact = async (req, res) => {
         res.status(500).json({ message: "Something went wrong", error: error.message });
     }
 };
+
+
+exports.getContacts = async (req, res) => {
+    try {
+
+        const contact = await db.find({});
+
+        if (contact) {
+            res.status(200).json({
+                message: "contacts get successfully",
+                success: true,
+                contacts: contact
+            })
+        }
+
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong", error: error.message });
+    }
+}
