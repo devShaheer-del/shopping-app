@@ -5,7 +5,7 @@ function Protector({ Component }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem("UserToken");
+        const token = localStorage.getItem("AdminName");
 
         if (!token) {
             navigate('/'); // Redirect to login if no token

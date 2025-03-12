@@ -20,10 +20,11 @@ function AdminLogin() {
         // Store Admin name in localStorage
         localStorage.setItem("AdminName", Admin);
         toast.success("Admin Login Successfully");
-
+        
         setTimeout(() => {
-          navigate('/home')
-        }, 3000);
+          navigate('/home');
+        }, 1000);
+        
 
       } else {
         toast.error(message || "Invalid credentials");

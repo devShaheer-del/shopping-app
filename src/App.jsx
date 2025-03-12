@@ -8,6 +8,9 @@ import Admin from './views/Admin';
 import SideBar from './Components/SideBar';
 import Login from './views/Login';
 import Protector from './Components/Protector';
+import AllCategories from './Components/AllCategories';
+import CreateProducts from './Components/CreateProducts';
+import UpdateCategory from './Components/UpdateCategory';
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function MainLayout() {
           <Route path="/category" element={<Protector Component={Category} />} />
           <Route path="/products" element={<Protector Component={Products} />} />
           <Route path="/admin" element={<Protector Component={Admin} />} />
+          <Route path='/allCategory' element={<Protector Component={AllCategories} />} />
+          <Route path='/UpdateCatgory/:id' element={<Protector Component={UpdateCategory} />} />
+          <Route path="/addProduct" element={<Protector Component={CreateProducts} />} />
         </Routes>
       </div>
     </div>
