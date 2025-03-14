@@ -3,7 +3,6 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './views/Home';
 import Category from './views/Category';
-import Products from './views/Products';
 import Admin from './views/Admin';
 import SideBar from './Components/SideBar';
 import Login from './views/Login';
@@ -11,6 +10,7 @@ import Protector from './Components/Protector';
 import AllCategories from './Components/AllCategories';
 import CreateProducts from './Components/CreateProducts';
 import UpdateCategory from './Components/UpdateCategory';
+import Products from './Components/Products';
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function MainLayout() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Protector Component={Home} />} />
           <Route path="/category" element={<Protector Component={Category} />} />
-          <Route path="/products" element={<Protector Component={Products} />} />
+          <Route path="/showProducts" element={<Protector Component={Products} />} />
           <Route path="/admin" element={<Protector Component={Admin} />} />
           <Route path='/allCategory' element={<Protector Component={AllCategories} />} />
           <Route path='/UpdateCatgory/:id' element={<Protector Component={UpdateCategory} />} />
