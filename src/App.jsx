@@ -9,7 +9,7 @@ import Contact from './pages/Contact';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import Shop from './pages/Shop';
-import Protected from './components/Protected';
+import Protect from './components/Protect';
 function App() {
   return (
     <>
@@ -18,12 +18,12 @@ function App() {
         <Layout>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/About' element={<About />} />
+            <Route path='/About' element={<Protect Component={About} />} />
             <Route path='/Service' element={<Service />} />
             <Route path='/Contact' element={<Contact />} />
             <Route path='/Login' element={<LoginPage />} />
             <Route path='/SignupPage' element={<SignupPage />} />
-            <Route path='/Shop' element={<Protected Component={Shop} />} />
+            <Route path='/Shop' element={<Protect Component={Shop} />} />
 
           </Routes>
         </Layout>
