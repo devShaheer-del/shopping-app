@@ -1,53 +1,69 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import toast from 'react-hot-toast';
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { toast } from 'react-hot-toast';
 function CreateProducts() {
     const [product, setProduct] = useState({
-        ProductName: '',
-        ProductCategory: '',
-        ProductPrize: '',
+        ProductName: "",
+        ProductCategory: "",
+        ProductPrize: "",
         photo: null,
-        InStock: ''
+        InStock: ""
     });
+
+    const [category, setCategory] = useState([]);
+
+    useEffect(() => {
+        getCategory();
+    }, []);
+
+    const getCategory = async () => {
+        try {
+            const result = await axios.get("http://localhost:8080/category/getCategories");
+            if (Array.isArray(result.data)) {
+                setCategory(result.data);
+            } else if (result.data && Array.isArray(result.data.category)) {
+                setCategory(result.data.category);
+            }
+        } catch (error) {
+            console.error("API Fetch Error:", error);
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
-        setProduct((prevProduct) => ({
-            ...prevProduct,
+        setProduct({
+            ...product,
             [name]: type === "file" ? files[0] : value
-        }));
+        });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Product Data:', product);
+
+        const formData = new FormData();
+        formData.append("ProductName", product.ProductName);
+        formData.append("ProductCategory", product.ProductCategory);
+        formData.append("ProductPrize", product.ProductPrize);
+        formData.append("photo", product.photo);
+        formData.append("InStock", product.InStock);
 
         try {
-            const url = "http://localhost:8080/createProduct/AddProducts";
-
-            // Use FormData for file upload
-            const formData = new FormData();
-            formData.append("productName", product.productName);
-            formData.append("productCategory", product.productCategory);
-            formData.append("productPrice", product.productPrice);
-            formData.append("productImage", product.productImage); // File
-            formData.append("inStock", product.inStock);
-
-            const response = await axios.post(url, formData, {
+            const response = await axios.post("http://localhost:8080/createProduct/AddProducts", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
             });
 
-            if (response.status === 200) {
-                toast.success("Product Added Successfully");
+            if (response.status === 201) {
+                // alert("Product Created Successfully!");
+                toast.success("Product Created Successfully!")
             } else {
-                toast.error("Product was not added");
+                // alert("Failed to create product.");
+                toast.error("Failed to create product.")
             }
         } catch (error) {
-            console.log('Something went wrong', error);
-            toast.error("An error occurred while adding the product.");
+            console.error("Error:", error);
+            alert("An error occurred while creating the product.");
         }
     };
 
@@ -58,15 +74,20 @@ function CreateProducts() {
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <div className="mb-3">
                         <label className="form-label">Product Name</label>
-                        <input type="text" className="form-control" name="ProductName" value={product.productName} onChange={handleChange} required />
+                        <input type="text" className="form-control" name="ProductName" value={product.ProductName} onChange={handleChange} required />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Product Category</label>
-                        <input type="text" className="form-control" name="ProductCategory" value={product.productCategory} onChange={handleChange} required />
+                        <select className="form-select" name="ProductCategory" value={product.ProductCategory} onChange={handleChange} required>
+                            <option value="">Select Category</option>
+                            {category.map((value, index) => (
+                                <option key={index} value={value.title}>{value.title}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Product Price</label>
-                        <input type="number" className="form-control" name="ProductPrize" value={product.productPrice} onChange={handleChange} required />
+                        <input type="number" className="form-control" name="ProductPrize" value={product.ProductPrize} onChange={handleChange} required />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Product Image</label>
@@ -74,7 +95,7 @@ function CreateProducts() {
                     </div>
                     <div className="mb-3">
                         <label className="form-label">In Stock</label>
-                        <input type="text" className="form-control" name="InStock" value={product.inStock} onChange={handleChange} required />
+                        <input type="number" className="form-control" name="InStock" value={product.InStock} onChange={handleChange} required />
                     </div>
                     <button type="submit" className="btn btn-primary w-100">Submit</button>
                 </form>
