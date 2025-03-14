@@ -12,6 +12,14 @@ exports.createProduct = async (req, res) => {
     try {
         const { ProductName, ProductCategory, ProductPrize, InStock } = req.body;
 
+        // Convert to numbers
+        const productPrice = Number(ProductPrize);
+        const inStockQty = Number(InStock);
+
+        if (isNaN(productPrice) || isNaN(inStockQty)) {
+            return res.status(400).json({ message: "Invalid price or stock quantity" });
+        }
+
         // Check if product already exists
         const isAvailable = await ProductDB.findOne({ ProductName });
         if (isAvailable) {
@@ -37,9 +45,9 @@ exports.createProduct = async (req, res) => {
         const newProduct = await ProductDB.create({
             ProductName,
             ProductCategory,
-            ProductPrize,
-            ProductImage: result.secure_url,  // Storing Cloudinary image URL
-            InStock
+            ProductPrize: productPrice,
+            ProductImage: result.secure_url,
+            InStock: inStockQty
         });
 
         res.status(201).json({

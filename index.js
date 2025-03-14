@@ -4,15 +4,17 @@ const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT || 8000;
 const fileupload = require('express-fileupload');
+
+// Middleware Setup
 app.use(express.json());
-require('./models/database');
+app.use(cors());
 
 app.use(fileupload({
     useTempFiles: true,
-    tempFileDir: '/tmp/' // Ensure temporary files are saved properly
+    tempFileDir: '/tmp/'
 }));
 
-app.use(cors());
+require('./models/database');
 
 const contactRouter = require('./routes/contactRoute');
 const userRouter = require('./routes/userRoute');
@@ -20,12 +22,12 @@ const authRouter = require('./routes/authProductsRoute');
 const productRouter = require('./routes/AddProducts');
 const AdminRouter = require('./routes/AdminRoute');
 const CategoryRouter = require('./routes/categoryRouter');
+
 app.use('/contact', contactRouter);
 app.use('/user', userRouter);
 app.use('/products', authRouter);
 app.use('/createProduct', productRouter);
 app.use('/admin', AdminRouter);
-app.use('/category',CategoryRouter);
-
+app.use('/category', CategoryRouter);
 
 app.listen(port, () => console.log(`Server Running on ${port}`));
