@@ -64,3 +64,61 @@ exports.createProduct = async (req, res) => {
         });
     }
 };
+
+
+exports.getProducts = async (req, res) => {
+    try {
+        const products = await ProductDB.find({});
+
+        if (!products || products.length === 0) {
+            return res.status(404).json({
+                message: "Sorry, no products found!",
+                success: false
+            });
+        }
+
+        res.status(200).json({
+            message: "Products fetched successfully",
+            success: true,
+            products: products // Lowercase 'p' to match frontend
+        });
+
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        res.status(500).json({
+            message: "Something went wrong",
+            success: false,
+            error: error.message
+        });
+    }
+};
+
+
+
+exports.deleteProduct = async (req, res) => {
+    try {
+
+        const id = req.params.id;
+
+        const deleteProduct = await ProductDB.findByIdAndDelete(id);
+
+        if (!deleteProduct) {
+            res.status(400).json({
+                message: "Product was not deleted!",
+                success: false
+            })
+        }
+
+        res.status(200).json({
+            message: "Product was deleted!",
+            success: true
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Something went wrong",
+            success: false,
+            error: error.message
+        });
+    }
+}
