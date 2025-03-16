@@ -24,6 +24,11 @@ const AdminRouter = require('./routes/AdminRoute');
 const CategoryRouter = require('./routes/categoryRouter');
 
 
+app.get('/', (req, res) => {
+    res.send("hello world");
+})
+
+
 app.use('/contact', contactRouter);
 app.use('/user', userRouter);
 app.use('/products', authRouter);
