@@ -23,11 +23,6 @@ const productRouter = require('./routes/AddProducts');
 const AdminRouter = require('./routes/AdminRoute');
 const CategoryRouter = require('./routes/categoryRouter');
 
-app.get('/', (req, res) => {
-    res.json({
-        message: "Sever Successfully Deployedd"
-    })
-})
 
 app.use('/contact', contactRouter);
 app.use('/user', userRouter);
