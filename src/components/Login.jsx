@@ -14,7 +14,7 @@ function Login() {
 
             console.log("Form Data:", obj);
 
-            const url = "https://shopping-6zddet5gv-devshaheer-dels-projects.vercel.app/user/userLogin";
+            const url = "https://shopping-6zddet5gv-devshaheer-dels-projects.vercel.app/";
 
             const response = await axios.post(url, obj);
 
