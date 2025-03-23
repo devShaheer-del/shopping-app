@@ -27,9 +27,9 @@ const ManageAdmin = () => {
       console.log(`📩 Sending Credentials to: ${admin.email}`);
   
       const url = "http://localhost:8080/admin/sendCredentials";
-      const response = await axios.post(url, {
-        email: admin.email, // ✅ Password frontend se nahi bhejna
-      });
+      const response = await axios.post(url, { email: admin.email });
+  
+      console.log("🟢 API Response:", response.data); // Debugging step
   
       if (response.data.success) {
         toast.success("✅ Credentials sent successfully!");
@@ -41,6 +41,23 @@ const ManageAdmin = () => {
       alert("❌ Error sending credentials.");
     }
   };
+
+
+  const handleAdminDelete = async (_id) => {
+    try {
+      
+      const id = _id;
+      const url = `http://localhost:8080/admin/AdminDelete/${id}`;
+      const response = axios.delete(url);
+       if(response){
+        toast.success("Admin Delete Successfully");
+       }
+      
+    } catch (error) {
+      console.log(`something went wrong ${error}`)
+    }
+  }
+  
 
   return (
     <div className="container mt-4">
@@ -78,7 +95,7 @@ const ManageAdmin = () => {
                     >
                       Send Credentials
                     </button>
-                    <button className="btn btn-danger btn-sm">🗑 Delete</button>
+                    <button className="btn btn-danger btn-sm" onClick={(e) => handleAdminDelete(admin._id)}>🗑 Delete</button>
                   </td>
                 </tr>
               ))
