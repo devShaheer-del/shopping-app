@@ -25,6 +25,13 @@ function CreateAdmin() {
 
         if (response.data) {
             toast.success("Admin Created Successfully");
+
+            setAdminData({
+                name : "",
+                email : "",
+                password : ""
+            })
+
         }
 
         console.log("Admin Created:", adminData);

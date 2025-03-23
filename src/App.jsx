@@ -11,6 +11,7 @@ import AllCategories from './Components/AllCategories';
 import CreateProducts from './Components/CreateProducts';
 import UpdateCategory from './Components/UpdateCategory';
 import Products from './Components/Products';
+import ManageAdmin from './Components/MangeAdmin';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function MainLayout() {
           <Route path="/category" element={<Protector Component={Category} />} />
           <Route path="/showProducts" element={<Protector Component={Products} />} />
           <Route path="/admin" element={<Protector Component={Admin} />} />
+          <Route path='/manageAdmins' element={<Protector Component={ManageAdmin} />} />
           <Route path='/allCategory' element={<Protector Component={AllCategories} />} />
           <Route path='/UpdateCatgory/:id' element={<Protector Component={UpdateCategory} />} />
           <Route path="/addProduct" element={<Protector Component={CreateProducts} />} />
