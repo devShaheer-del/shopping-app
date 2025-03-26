@@ -2,8 +2,11 @@ import axios from 'axios';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-
+import { useAuth } from '../../context/auth';
 function Login() {
+
+    const { auth, setAuth } = useAuth();
+
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -14,20 +17,30 @@ function Login() {
 
             console.log("Form Data:", obj);
 
-            const url = "https://shopping-6zddet5gv-devshaheer-dels-projects.vercel.app/user/userLogin";
+            const url = "http://localhost:8080/user/userLogin";
 
             const response = await axios.post(url, obj);
 
             if (response.status === 200 || response.status === 201) {
-                const { token, UserName } = response.data;
+                const { token, UserName, user, userId } = response.data;
+
+
 
                 localStorage.setItem('Usertoken', token);
                 localStorage.setItem('UserName', UserName);
+                localStorage.setItem('User', JSON.stringify(user));
+                localStorage.setItem('id', userId)
 
                 toast.success("Login Successfully");
 
+                setAuth({
+                    ...auth,
+                    user: UserName,
+                    token: token
+                })
+
                 setTimeout(() => {
-                    window.location.href = "/"
+                    window.location.href = '/'
                 }, 3000);
                 // No need for setTimeout
             } else {

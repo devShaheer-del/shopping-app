@@ -5,19 +5,25 @@ import toast from 'react-hot-toast';
 
 function Header() {
     const [userName, setUserName] = useState(null);
+    const [token, Settoken] = useState(null);
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         const storedUser = localStorage.getItem('UserName');
+        const storedToken = localStorage.getItem('Usertoken');
         if (storedUser) {
             setUserName(storedUser);
+            Settoken(storedToken)
         }
     }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('UserName');
-        localStorage.removeItem('token');
+        localStorage.removeItem('Usertoken');
+        localStorage.removeItem('User')
         setUserName(null);
+        Settoken(null);
         navigate('/Login');
         toast.success("User LogOut Success")
     };
@@ -54,6 +60,7 @@ function Header() {
                                     <li className="nav-item">
                                         <Link to="/Shop" className="nav-link active">Shop</Link>
                                     </li>
+
                                 </>
                             ) : (
                                 <>
@@ -69,6 +76,10 @@ function Header() {
                         </li>
                         {userName ? (
                             <>
+
+                                <li className="nav-item">
+                                    <Link to="/Dashboard" className="nav-link active">DashBoard</Link>
+                                </li>
                                 <li className="nav-item">
                                     <span className="nav-link active fw-bold">Welcome, {userName}</span>
                                 </li>
