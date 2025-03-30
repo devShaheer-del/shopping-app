@@ -25,9 +25,10 @@ function Login() {
                 localStorage.setItem("UserName", UserName);
                 localStorage.setItem("User", JSON.stringify(user));
                 localStorage.setItem("id", userId);
-
+                
                 // Update global state
                 setAuth({ user: UserName, token });
+
 
                 toast.success("Login Successfully");
                 navigate("/");  // No need for window.location.reload()

@@ -1,24 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../../context/cart';
+import { useAuth } from '../../context/auth';
 import Products from './Products';
 
 const CartComponent = () => {
     const [logedUser, setLogedUser] = useState("");
     const { cart } = useCart(); // ✅ Using context directly
-
+    const { auth } = useAuth();
     useEffect(() => {
         // ✅ Fetch user data from localStorage
-        const auth = localStorage.getItem('User');
-        if (auth) {
-            try {
-                const parsedata = JSON.parse(auth);
-                console.log(parsedata)
-                if (parsedata) {
-                    setLogedUser(parsedata.name);
-                }
-            } catch (error) {
-                console.error("Error parsing user data:", error);
-            }
+        const authName = localStorage.getItem('UserName');
+        if (authName) {
+            setLogedUser(authName);
         }
     }, []);
 
@@ -38,16 +31,16 @@ const CartComponent = () => {
                         {cart.map((product, index) => (
                             <div key={index} className="col-md-4">
                                 <div className="card mb-3 shadow">
-                                    <img 
-                                        src={product.ProductImage} 
-                                        className="card-img-top" 
-                                        alt={product.ProductName} 
-                                        style={{ height: "200px", objectFit: "cover" }} 
+                                    <img
+                                        src={product.ProductImage}
+                                        className="card-img-top"
+                                        alt={product.ProductName}
+                                        style={{ height: "200px", objectFit: "cover" }}
                                     />
                                     <div className="card-body">
                                         <h5 className="card-title">{product.ProductName}</h5>
                                         <p className="card-text">Price: ${product.ProductPrize}</p>
-                                        
+
                                         <button className="btn btn-danger">Remove</button>
                                     </div>
                                 </div>
