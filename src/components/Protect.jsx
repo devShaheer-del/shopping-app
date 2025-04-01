@@ -12,7 +12,7 @@ function Protect(props) {
         const token = localStorage.getItem('Usertoken');
 
 
-        if (!token && user) {
+        if (!token || !user) {
             navigate('/Login');
         }
 
