@@ -5,7 +5,8 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";  // Import useAuth
 
 function Login() {
-    const { setAuth } = useAuth();  // Use context
+    const { setAuth,auth } = useAuth();  
+    console.log(auth)// Use context
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -18,13 +19,13 @@ function Login() {
             const response = await axios.post(url, obj);
 
             if (response.status === 200 || response.status === 201) {
-                const { token, UserName, user, userId } = response.data;
+                const { token, UserName, user } = response.data;
 
                 // Store in localStorage
                 localStorage.setItem("Usertoken", token);
                 localStorage.setItem("UserName", UserName);
                 localStorage.setItem("User", JSON.stringify(user));
-                localStorage.setItem("id", userId);
+                
                 
                 // Update global state
                 setAuth({ user: UserName, token });

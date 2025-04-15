@@ -4,7 +4,9 @@ import { useCart } from '../../context/cart';
 import toast from 'react-hot-toast';
 function Products() {
   const [products, setProducts] = useState([]);
-  const { cart, setCart } = useCart();
+
+  const { cart, Setcart } = useCart();
+
   const fetchProducts = async () => {
     try {
       const url = "http://localhost:8080/createProduct/getAllProducts";
@@ -56,7 +58,7 @@ function Products() {
                     {item.InStock ? 'In Stock' : 'Out of Stock'}
                   </p>
                   <br />
-                  <button className="btn btn-warning w-100 fw-bold mt-2" onClick={() => { setCart([...cart, item]); toast.success("Product Added success") }} >Add To Cart</button>
+                  <button className="btn btn-warning w-100 fw-bold mt-2" onClick={() => { Setcart([...cart, item]); localStorage.setItem('cart', JSON.stringify([...cart, item])); toast.success("Item Add to Cart") }} >Add To Cart</button>
                 </div>
               </div>
             </div>
