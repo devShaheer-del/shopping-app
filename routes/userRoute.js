@@ -5,6 +5,7 @@ const { SignupValidation, LoginValidation } = require('../middlewares/userValida
 
 router.post('/userCreate',SignupValidation, userController.CreateUser);
 router.post('/userLogin',LoginValidation,userController.LoginUser);
-router.get('/getUsers',userController.getUser)
+router.get('/getUsers',userController.getUser);
+router.put('/userUpdate/:id',userController.updateUser);
 
 module.exports = router;

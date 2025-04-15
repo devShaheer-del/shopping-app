@@ -14,6 +14,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    plainPassword: {
+        type: String
+    },
     role: {
         type: String,
         enum: ["admin", "super_admin"], // Dropdown mein sirf yeh values allow hongi

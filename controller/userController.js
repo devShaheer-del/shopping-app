@@ -72,6 +72,8 @@ exports.LoginUser = async (req, res) => {
             status: true,
             UserName: IsUserExistAgain.name,
             token: token,
+            user: IsUserExistAgain,
+            userId : IsUserExistAgain._id
         });
 
     } catch (error) {
@@ -103,3 +105,44 @@ exports.getUser = async (req, res) => {
         });
     }
 }
+
+
+
+exports.updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;  // ✅ Extracting correct ID
+        const { name, email, password } = req.body;
+
+        let user = await db.findById(id);  // ✅ Correct model usage
+
+        if (!user) {
+            return res.status(400).json({
+                message: "User not found"
+            });
+        }
+
+        // ✅ Update only provided fields
+        if (name) user.name = name;
+        if (email) user.email = email;
+
+        // ✅ Only hash password if it's provided
+        if (password) {
+            user.password = await bcrypt.hash(password, 10);
+        }
+
+        await user.save(); // ✅ Use await when saving
+
+        return res.status(200).json({
+            message: "User updated successfully",
+            user
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Something went wrong",
+            error: error.message,
+        });
+    }
+};
+
+

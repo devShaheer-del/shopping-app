@@ -3,7 +3,7 @@ const joi = require('joi');
 exports.SignupValidation = (req, res, next) => {
     try {
         const Schema = joi.object({
-            name: joi.string().min(7).max(15).required(),
+            name: joi.string().min(4).max(10).required(),
             email: joi.string().email().required(),
             password: joi.string().min(5).max(15)
         });
