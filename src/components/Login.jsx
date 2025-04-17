@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";  // Import useAuth
 
 function Login() {
-    const { setAuth,auth } = useAuth();  
+    const { setAuth, auth } = useAuth();
     console.log(auth)// Use context
     const navigate = useNavigate();
 
@@ -25,10 +25,12 @@ function Login() {
                 localStorage.setItem("Usertoken", token);
                 localStorage.setItem("UserName", UserName);
                 localStorage.setItem("User", JSON.stringify(user));
+         
                 
-                
+
                 // Update global state
                 setAuth({ user: UserName, token });
+
 
 
                 toast.success("Login Successfully");

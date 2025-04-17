@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({
         user: null,
-        token: null
+        token: ""
     });
 
     // Load user data from localStorage on mount
