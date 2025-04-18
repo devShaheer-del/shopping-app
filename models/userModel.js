@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { default: Products } = require('../../react app/src/components/Products');
 
 
 
