@@ -4,8 +4,9 @@ import Logo from "../assets/images/logo.png";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 import { useCart } from "../../context/cart";
+
 function Header() {
-    const { auth, setAuth } = useAuth();  // Get auth state
+    const { auth, setAuth } = useAuth();
     const { cart } = useCart();
     const navigate = useNavigate();
 
@@ -13,7 +14,7 @@ function Header() {
         localStorage.removeItem("UserName");
         localStorage.removeItem("Usertoken");
         localStorage.removeItem("User");
-        setAuth({ user: null, token: null });  // Clear auth state
+        setAuth({ user: null, token: "" });
         toast.success("User LogOut Success");
         navigate("/Login");
     };
@@ -53,7 +54,9 @@ function Header() {
                                     <Link to="/Cart" className="nav-link active">Cart ({cart.length})</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <span className="nav-link active fw-bold">Welcome, {auth.user}</span>
+                                    <span className="nav-link active fw-bold">
+                                        Welcome, {auth.user?.name}
+                                    </span>
                                 </li>
                                 <li className="nav-item">
                                     <button onClick={handleLogout} className="btn btn-danger btn-sm ms-2">Logout</button>

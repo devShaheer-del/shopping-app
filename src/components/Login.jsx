@@ -2,11 +2,10 @@ import axios from "axios";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useAuth } from "../../context/auth";  // Import useAuth
+import { useAuth } from "../../context/auth";
 
 function Login() {
-    const { setAuth, auth } = useAuth();
-    console.log(auth)// Use context
+    const { setAuth } = useAuth();
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -25,16 +24,12 @@ function Login() {
                 localStorage.setItem("Usertoken", token);
                 localStorage.setItem("UserName", UserName);
                 localStorage.setItem("User", JSON.stringify(user));
-         
-                
 
-                // Update global state
-                setAuth({ user: UserName, token });
-
-
+                // Update global state with full user object
+                setAuth({ user, token });
 
                 toast.success("Login Successfully");
-                navigate("/");  // No need for window.location.reload()
+                navigate("/");
             } else {
                 toast.error("Invalid Email and Password");
             }

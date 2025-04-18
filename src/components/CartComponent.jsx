@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "../../context/cart";
+import { Link } from "react-router-dom";
 
 const CartComponent = () => {
     const [logedUser, setLogedUser] = useState("");
@@ -76,9 +77,9 @@ const CartComponent = () => {
                 <div className="checkout mt-5 p-4 border-top">
                     <h5 className="text-end text-primary">Total: ${totalPrice.toFixed(2)}</h5>
                     <div className="text-end">
-                        <button className="btn btn-success mt-2">
+                        <Link to="/CheckOut" className="btn btn-success mt-2">
                             Proceed to Checkout
-                        </button>
+                        </Link >
                     </div>
                 </div>
             )}

@@ -8,20 +8,25 @@ export const AuthProvider = ({ children }) => {
         token: ""
     });
 
-    // Load user data from localStorage on mount
+    // Load user data from localStorage on first mount
     useEffect(() => {
-        const storedUser = localStorage.getItem("User");
-        const storedToken = localStorage.getItem("Usertoken");
+        try {
+            const storedUser = localStorage.getItem("User");
+            const storedToken = localStorage.getItem("Usertoken");
 
-        if (storedUser && storedToken) {
-            setAuth({
-                user: JSON.parse(storedUser),
-                token: storedToken
-            });
+            // Check if both user and token exist and are valid JSON
+            if (storedUser && storedToken) {
+                setAuth({
+                    user: JSON.parse(storedUser), // Parse user data safely
+                    token: storedToken
+                });
+            }
+        } catch (error) {
+            console.error("Error loading user data from localStorage:", error);
         }
     }, []);
 
-    // Whenever auth state changes, update localStorage
+    // Update localStorage when auth changes
     useEffect(() => {
         if (auth.user && auth.token) {
             localStorage.setItem("User", JSON.stringify(auth.user));

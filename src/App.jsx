@@ -12,6 +12,7 @@ import Shop from './pages/Shop';
 import Protect from './components/Protect';
 import Dashboard from './components/Dashboard';
 import CartComponent from './components/CartComponent';
+import CheckOut from './components/CheckOut';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path='/Shop' element={<Protect Component={Shop} />} />
             <Route path='/Dashboard' element={<Protect Component={Dashboard} />} />
             <Route path='/Cart' element={<Protect Component={CartComponent} />} />
+            <Route path='/CheckOut' element={<Protect Component={CheckOut} />} />
 
           </Routes>
         </Layout>
