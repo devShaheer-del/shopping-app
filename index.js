@@ -22,6 +22,7 @@ const authRouter = require('./routes/authProductsRoute');
 const productRouter = require('./routes/AddProducts');
 const AdminRouter = require('./routes/AdminRoute');
 const CategoryRouter = require('./routes/categoryRouter');
+const OrderRoute = require('./routes/orderRoute');
 
 
 app.get('/', (req, res) => {
@@ -35,5 +36,6 @@ app.use('/products', authRouter);
 app.use('/createProduct', productRouter);
 app.use('/admin', AdminRouter);
 app.use('/category', CategoryRouter);
+app.use('/orders',OrderRoute);
 
 app.listen(port, () => console.log(`Server Running on ${port}`));
