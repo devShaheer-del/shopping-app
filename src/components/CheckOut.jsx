@@ -1,15 +1,75 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "../../context/cart";
+import { toast } from 'react-hot-toast';
 const CheckOut = () => {
-
-
     const { cart } = useCart();
 
-    const [order, Setorder] = useState(cart); 
-    
-    const totalprize = order.reduce((sum,item) => sum + Number(item.ProductPrize),0);
+    const [user, Setuser] = useState({
+        name: "",
+        email: ""
+    });
 
-    console.log(order);
+    const [formData, setFormData] = useState({
+        address: "",
+        phone: "",
+        cardNumber: "",
+        expiryDate: "",
+        cvv: ""
+    });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    useEffect(() => {
+        const data = localStorage.getItem('User');
+        if (data) {
+            const Userdata = JSON.parse(data);
+            Setuser({
+                name: Userdata.name || "",
+                email: Userdata.email || ""
+            });
+        }
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const payload = {
+            customer_name: user.name,
+            customer_email: user.email,
+            customer_address: formData.address,
+            customer_phone: formData.phone,
+            customer_card: formData.cardNumber,
+            customer_expire: formData.expiryDate,
+            customer_cvv: formData.cvv,
+            cartItems: cart
+        };
+
+        try {
+            const res = await fetch("http://localhost:8080/orders/create-order", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                toast.success("Order Placed Successfully");
+                
+            } else {
+                toast.error("Order was Placed Successfully")
+            }
+        } catch (err) {
+            console.error("Order error:", err);
+            alert("Something went wrong!");
+        }
+    };
+
+    const totalprize = cart.reduce((sum, item) => sum + Number(item.ProductPrize), 0);
 
     return (
         <div className="container py-5">
@@ -18,7 +78,7 @@ const CheckOut = () => {
                     <div className="card shadow-sm mb-4">
                         <div className="card-body">
                             <h4 className="card-title mb-4">Billing Information</h4>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Full Name</label>
                                     <input
@@ -26,7 +86,8 @@ const CheckOut = () => {
                                         className="form-control"
                                         id="name"
                                         name="name"
-                                        placeholder="Enter your full name"
+                                        value={user.name}
+                                        readOnly
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -36,7 +97,8 @@ const CheckOut = () => {
                                         className="form-control"
                                         id="email"
                                         name="email"
-                                        placeholder="Enter your email"
+                                        value={user.email}
+                                        readOnly
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -46,7 +108,9 @@ const CheckOut = () => {
                                         id="address"
                                         name="address"
                                         rows="3"
-                                        placeholder="Enter your address"
+                                        value={formData.address}
+                                        onChange={handleChange}
+                                        required
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -56,7 +120,9 @@ const CheckOut = () => {
                                         className="form-control"
                                         id="phone"
                                         name="phone"
-                                        placeholder="Enter your phone number"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        required
                                     />
                                 </div>
 
@@ -68,7 +134,9 @@ const CheckOut = () => {
                                         className="form-control"
                                         id="cardNumber"
                                         name="cardNumber"
-                                        placeholder="1234 5678 9876 5432"
+                                        value={formData.cardNumber}
+                                        onChange={handleChange}
+                                        required
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -78,7 +146,9 @@ const CheckOut = () => {
                                         className="form-control"
                                         id="expiryDate"
                                         name="expiryDate"
-                                        placeholder="MM/YY"
+                                        value={formData.expiryDate}
+                                        onChange={handleChange}
+                                        required
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -88,7 +158,9 @@ const CheckOut = () => {
                                         className="form-control"
                                         id="cvv"
                                         name="cvv"
-                                        placeholder="123"
+                                        value={formData.cvv}
+                                        onChange={handleChange}
+                                        required
                                     />
                                 </div>
 
@@ -107,16 +179,11 @@ const CheckOut = () => {
                         <div className="card-body">
                             <h5 className="card-title">Order Summary</h5>
                             {
-                                cart?.map((value) => {
-                                    return (
-                                        <>
-                                            <ul className="list-group list-group-flush">
-                                                <li className="list-group-item">{`item ${value.ProductName} - Prize is ${value.ProductPrize}`}</li>
-                                            </ul>
-
-                                        </>
-                                    )
-                                })
+                                cart?.map((value, index) => (
+                                    <ul className="list-group list-group-flush" key={index}>
+                                        <li className="list-group-item">{`Item: ${value.ProductName} - Price: ${value.ProductPrize}`}</li>
+                                    </ul>
+                                ))
                             }
                             <div className="mt-3 d-flex justify-content-between">
                                 <strong>Total:</strong>
