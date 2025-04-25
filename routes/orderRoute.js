@@ -4,8 +4,8 @@ const orderController = require('../controller/orderController');
 // const { OrderValidation } = require('../middlewares/ordersValidate');
 
 
-router.post('/create-order',  orderController.CreateOrder);
-
+router.post('/create-order', orderController.CreateOrder);
+router.get('/get-orders', orderController.getOrders);
 
 
 module.exports = router;

@@ -32,10 +32,10 @@ const OrderSchema = mongoose.Schema({
     cartItems: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product',  // Assuming you are referencing a Product model
+            ref: 'Products',  // Changed 'Product' to 'Products' to match the model name
             required: true
         }
-    ]
+    ],
 });
 
 const OrderModel = mongoose.model('Orders', OrderSchema);

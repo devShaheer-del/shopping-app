@@ -1,5 +1,4 @@
 const OrderModel = require('../models/orders');
-
 exports.CreateOrder = async (req, res) => {
     try {
         const {
@@ -10,7 +9,8 @@ exports.CreateOrder = async (req, res) => {
             customer_card,
             customer_expire,
             customer_cvv,
-            cartItems
+            cartItems,
+            
         } = req.body;
 
         if (!customer_name || !customer_email || !cartItems?.length) {
@@ -28,7 +28,8 @@ exports.CreateOrder = async (req, res) => {
             customer_card,
             customer_expire,
             customer_cvv,
-            cartItems
+            cartItems,
+            
         });
 
         await newOrder.save();
@@ -49,3 +50,35 @@ exports.CreateOrder = async (req, res) => {
         });
     }
 };
+
+
+
+exports.getOrders = async (req, res) => {
+  try {
+    const orders = await OrderModel.find({}).populate('cartItems');  // Populating cartItems with product details
+
+    if (orders && orders.length > 0) {
+      return res.status(200).json({
+        message: "All orders fetched successfully",
+        success: true,
+        orders: orders
+      });
+    } else {
+      return res.status(404).json({
+        message: "No orders found",
+        success: false
+      });
+    }
+  } catch (error) {
+    console.error("Order fetch error:", error);
+    return res.status(500).json({
+      message: "Something went wrong",
+      success: false
+    });
+  }
+};
+
+  
+
+
+
