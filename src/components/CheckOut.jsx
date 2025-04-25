@@ -14,7 +14,8 @@ const CheckOut = () => {
         phone: "",
         cardNumber: "",
         expiryDate: "",
-        cvv: ""
+        cvv: "",
+
     });
 
     const handleChange = (e) => {
@@ -43,7 +44,8 @@ const CheckOut = () => {
             customer_card: formData.cardNumber,
             customer_expire: formData.expiryDate,
             customer_cvv: formData.cvv,
-            cartItems: cart
+            cartItems: cart,
+
         };
 
         try {
@@ -59,7 +61,7 @@ const CheckOut = () => {
 
             if (data.success) {
                 toast.success("Order Placed Successfully");
-                
+
             } else {
                 toast.error("Order was Placed Successfully")
             }
@@ -163,6 +165,7 @@ const CheckOut = () => {
                                         required
                                     />
                                 </div>
+
 
                                 <div className="d-flex justify-content-between">
                                     <button type="submit" className="btn btn-primary">Submit Payment</button>
