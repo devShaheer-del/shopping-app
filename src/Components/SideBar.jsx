@@ -76,10 +76,13 @@ const SideBar = ({ adminName }) => {
               {isAdminOpen && (
                 <ul className="nav flex-column ps-3">
                   <li className="nav-item">
-                    <Link to="/admin" className="nav-link text-white">➕ Add Admin</Link>
+                    <Link to="/admin" className="nav-link text-white"> Add Admin</Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/manageAdmins" className="nav-link text-white">⚙️ Manage Admins</Link>
+                    <Link to="/manageAdmins" className="nav-link text-white"> Manage Admins</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/Orders" className="nav-link text-white">Orders</Link>
                   </li>
                 </ul>
               )}
