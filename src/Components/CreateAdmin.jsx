@@ -34,7 +34,7 @@ function CreateAdmin() {
 
         }
 
-        console.log("Admin Created:", adminData);
+     
         // API CALL yahan implement karni hai
     };
 

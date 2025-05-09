@@ -20,7 +20,7 @@ function Products() {
                 console.error("Unexpected response format", response.data);
             }
         } catch (error) {
-            console.log(`Something went wrong: ${error.message}`);
+           
         }
     };
 

@@ -13,7 +13,7 @@ const ManageAdmin = () => {
         setAdmins(response.data.admin);
       }
     } catch (error) {
-      console.log(`Something went wrong: ${error}`);
+     
     }
   };
 
@@ -24,12 +24,12 @@ const ManageAdmin = () => {
   // Send Credentials Function
   const sendCredentials = async (admin) => {
     try {
-      console.log(`📩 Sending Credentials to: ${admin.email}`);
+     
   
       const url = "http://localhost:8080/admin/sendCredentials";
       const response = await axios.post(url, { email: admin.email });
   
-      console.log("🟢 API Response:", response.data); // Debugging step
+     
   
       if (response.data.success) {
         toast.success("✅ Credentials sent successfully!");
@@ -37,7 +37,7 @@ const ManageAdmin = () => {
         alert("❌ Failed to send credentials.");
       }
     } catch (error) {
-      console.log("🚨 Error sending credentials:", error);
+     
       alert("❌ Error sending credentials.");
     }
   };
@@ -54,7 +54,7 @@ const ManageAdmin = () => {
        }
       
     } catch (error) {
-      console.log(`something went wrong ${error}`)
+     
     }
   }
   

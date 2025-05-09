@@ -10,7 +10,7 @@ function SignUpUser() {
             const url = "http://localhost:8080/user/getUsers";
             const response = await axios.get(url);
 
-            console.log("API Response:", response.data); // ✅ Debugging API response
+          
 
             // If API returns an object with "users" array, update accordingly
             if (response.data && Array.isArray(response.data.users)) {
@@ -34,7 +34,7 @@ function SignUpUser() {
 
     // Debugging state update
     useEffect(() => {
-        console.log("Updated Users State:", Users);
+      
     }, [Users]);
 
     return (

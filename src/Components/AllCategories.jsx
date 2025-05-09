@@ -11,15 +11,15 @@ function AllCategories() {
       const url = "http://localhost:8080/category/getCategories";
       const result = await axios.get(url);
 
-      console.log("Full API Response:", result.data); // Check API response
+     
 
       if (result.data && Array.isArray(result.data.category)) {
         setCategory(result.data.category); // ✅ Correct property
       } else {
-        console.log("Data is not in expected array format:", result.data);
+       
       }
     } catch (error) {
-      console.log(`Something went wrong: ${error}`);
+     
     }
   };
 

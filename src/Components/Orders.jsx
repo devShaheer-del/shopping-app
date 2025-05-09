@@ -5,12 +5,13 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [message, setMessage] = useState("Here is your Orders!");
 
+
   const getOrders = async () => {
     try {
       const url = "http://localhost:8080/orders/get-orders";
       const response = await axios.get(url);
 
-      console.log("Fetched data:", response.data); // Check if orders data is being received correctly
+     // Check if orders data is being received correctly
 
       const orderList = response.data?.orders;  // Make sure 'orders' is the correct field
 
@@ -20,7 +21,7 @@ const Orders = () => {
         setMessage("No orders found");
       }
     } catch (error) {
-      console.log(`Something went wrong: ${error}`);
+   
       setMessage("Something went wrong while fetching orders.");
     }
   };
