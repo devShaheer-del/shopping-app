@@ -12,7 +12,7 @@ function Signup() {
             const formData = new FormData(e.target);
             const obj = Object.fromEntries(formData.entries());
 
-            console.log(obj);
+
 
             const url = "http://localhost:8080/user/userCreate";
             const response = await axios.post(url, obj, {
@@ -30,7 +30,7 @@ function Signup() {
             }
 
         } catch (error) {
-            console.log('something went wrong');
+
             toast.error(error);
         }
     }

@@ -24,7 +24,7 @@ const CartComponent = () => {
             myCart.splice(index, 1);
             Setcart(myCart);
         } catch (error) {
-            console.log(error)
+          
         }
     }
 

@@ -63,7 +63,7 @@ const CheckOut = () => {
                 toast.success("Order Placed Successfully");
 
             } else {
-                toast.error("Order was Placed Successfully")
+                toast.error("Order not Placed ")
             }
         } catch (err) {
             console.error("Order error:", err);

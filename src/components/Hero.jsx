@@ -1,11 +1,11 @@
 import React from "react";
 import background_image from "../assets/images/hero.png";
-import { useAuth } from "../../context/auth";
+
 
 
 function Hero() {
 
-  const { auth } = useAuth();
+  
 
   return (
     <>
@@ -42,7 +42,7 @@ function Hero() {
       </div>
 
       {/* Debugging Auth */}
-      <pre>{JSON.stringify(auth, null, 4)}</pre>
+      
     </>
   );
 }
