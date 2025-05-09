@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const UserModel = require('../models/userModel'); // 👈 User model import karo
 
 exports.AuthProducts = async (req, res, next) => {
     try {
@@ -19,7 +20,17 @@ exports.AuthProducts = async (req, res, next) => {
         }
 
         const decodeToken = jwt.verify(token, process.env.SECRET_KEY);
-        req.user = decodeToken;
+
+        // 👇 Yahaan database se user find karo
+        const user = await UserModel.findById(decodeToken.id).select('-password'); // password hide kar diya
+
+        if (!user) {
+            return res.status(401).json({
+                message: "Unauthorized, User not found"
+            });
+        }
+
+        req.user = user;  // 👈 Ab pura user object aa gaya
         next();
 
     } catch (error) {

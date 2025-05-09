@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const OrderSchema = mongoose.Schema({
+
+
     customer_name: {
         type: String,
         required: true
@@ -36,6 +38,8 @@ const OrderSchema = mongoose.Schema({
             required: true
         }
     ],
+
+
 });
 
 const OrderModel = mongoose.model('Orders', OrderSchema);

@@ -2,6 +2,7 @@ const OrderModel = require('../models/orders');
 exports.CreateOrder = async (req, res) => {
     try {
         const {
+            
             customer_name,
             customer_email,
             customer_address,
@@ -10,6 +11,7 @@ exports.CreateOrder = async (req, res) => {
             customer_expire,
             customer_cvv,
             cartItems,
+           
             
         } = req.body;
 
@@ -21,6 +23,7 @@ exports.CreateOrder = async (req, res) => {
         }
 
         const newOrder = new OrderModel({
+         
             customer_name,
             customer_email,
             customer_address,
@@ -29,6 +32,7 @@ exports.CreateOrder = async (req, res) => {
             customer_expire,
             customer_cvv,
             cartItems,
+            
             
         });
 
